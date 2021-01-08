@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+<span>Username: </span> <span th:text="${user.username}"/>
+<br/>
+<span th:text="${user.firstName}"/>
+<span> </span>
+<span th:text="${user.lastName}"/>
+<br/>
+<span th:text="${user.age}"/><span> years old</span>
+<br/>
+<span>Id: </span><span th:text="${user.id}"/>
+</body>
+</html>
