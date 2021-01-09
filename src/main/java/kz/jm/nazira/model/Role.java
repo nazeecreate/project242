@@ -13,7 +13,7 @@ public class Role implements GrantedAuthority {
 
     private String role;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable (name="user_roles",
             joinColumns=@JoinColumn (name="role_id"),
             inverseJoinColumns=@JoinColumn(name="user_id"))

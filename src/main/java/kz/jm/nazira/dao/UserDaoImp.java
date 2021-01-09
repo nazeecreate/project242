@@ -19,8 +19,8 @@ public class UserDaoImp implements UserDao{
     @PersistenceContext
     private EntityManager entityManager;
 
-//    @Autowired
-//    BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public List<User> index() {
@@ -39,7 +39,7 @@ public class UserDaoImp implements UserDao{
     @Override
     public void save(User user) {
         user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
-      //  user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         entityManager.persist(user);
     }
 
@@ -50,8 +50,8 @@ public class UserDaoImp implements UserDao{
         user.setLastName(updatedUser.getLastName());
         user.setAge(updatedUser.getAge());
         user.setUsername(updatedUser.getUsername());
-       // user.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
-       user.setPassword(updatedUser.getPassword());
+        user.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
+       //user.setPassword(updatedUser.getPassword());
     }
 
     @Override
