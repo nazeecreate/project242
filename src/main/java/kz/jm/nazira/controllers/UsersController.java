@@ -1,11 +1,16 @@
 package kz.jm.nazira.controllers;
 
 import kz.jm.nazira.dao.UserDao;
+import kz.jm.nazira.model.Role;
 import kz.jm.nazira.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 @RequestMapping("admin/users")
@@ -25,7 +30,15 @@ public class UsersController {
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("user") User user) {
+    public String create(@ModelAttribute("user") User user, @RequestParam(value = "makeAdmin", required = false) String makeAdmin) {
+        Set<Role> roles = new HashSet<>();
+        roles.add(new Role(1L, "ROLE_USER"));
+        if(makeAdmin != null)
+        {
+            roles.add(new Role(2L, "ROLE_ADMIN"));
+        }
+        user.setRoles(roles);
+
         userDao.save(user);
         return "redirect:/admin/users";
     }

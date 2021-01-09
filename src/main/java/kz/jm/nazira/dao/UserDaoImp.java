@@ -38,7 +38,6 @@ public class UserDaoImp implements UserDao{
 
     @Override
     public void save(User user) {
-        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         entityManager.persist(user);
     }
@@ -51,7 +50,6 @@ public class UserDaoImp implements UserDao{
         user.setAge(updatedUser.getAge());
         user.setUsername(updatedUser.getUsername());
         user.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
-       //user.setPassword(updatedUser.getPassword());
     }
 
     @Override
